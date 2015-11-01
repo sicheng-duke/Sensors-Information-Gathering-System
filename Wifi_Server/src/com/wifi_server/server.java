@@ -72,7 +72,7 @@ public class server extends JFrame {
 		textview=new TextArea(); 
 		ipAddress=new TextField();
 		
-		ipAddress.setText("欢迎使用天津大学电子信息工程学院物联网系统");
+		ipAddress.setText("Welcome");
 		
 		ipAddress.setFont(new Font("宋体",Font.BOLD,20));
 		ipAddress.setSize(16, 1);
@@ -103,7 +103,7 @@ public class server extends JFrame {
 		//topLeft.add(Imagelabel);
 		//topLeft.add(Box.createVerticalStrut(10));
 		topLeft.add(textview);
-		//创建左栏
+		
 		topLeft.add(Box.createVerticalStrut(10));
 		topLeft.add(ipAddress);
 
@@ -130,7 +130,7 @@ public class server extends JFrame {
 		f.setLocation(100, 100);
 		f.setSize(917, 600);
 		//f.setIconImage((new ImageIcon("image/Xiaohui.jpg")).getImage());
-		f.setTitle("天津大学电子信息工程学院物联网系统");
+		f.setTitle("Tianjin University Information Gathering System");
 		f.addWindowListener(new WindowAdapter()
 		{
 			public void windowClosing(WindowEvent e)
@@ -171,7 +171,7 @@ public class server extends JFrame {
 				String s=textview.getText().toString();
 				String ss="";
 				textview.setText(ss);
-				ipAddress.setText("数据已保存到C盘data文件夹下");
+				ipAddress.setText("Set IP address"+s);
 				try {
 					file.saveToDisk("Data",s);
 				} catch (IOException e) {
