@@ -11,7 +11,7 @@ public class FileService {
 
     public void saveToDisk(String fileName, String content) throws IOException {  
         //File file = new File(new File("/mnt/sdcard"),fileName);  
-        //考虑不同版本的sdCard目录不同，采用系统提供的API获取SD卡的目录  
+        
         Calendar c = Calendar.getInstance();
         int year=c.get(Calendar.YEAR);
         int month=c.get(Calendar.MONTH)+1;
