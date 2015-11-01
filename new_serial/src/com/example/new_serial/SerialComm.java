@@ -76,7 +76,7 @@ public class SerialComm extends Activity {
 	        	    serial_fd=HardwareControler.openSerialPort("/dev/s3c2410_serial3",9600,8,1);
 	        	    Toast.makeText(getApplicationContext(), "Serial Open", Toast.LENGTH_SHORT).show();
 	        	    new MyThread().start();
-	        	    System.out.println("启动串口线程");
+	        	    System.out.println("Open Serial");
 	        	       }
 	        	         
 	        	        });
@@ -85,7 +85,7 @@ public class SerialComm extends Activity {
 	        	   public void onClick(View v) {
 	        	    // TODO Auto-generated method stub
 	       	        HardwareControler.close(serial_fd);
-	       	        textView.append("\r\n串口关闭");
+	       	        textView.append("\r\nclose Serial");
 	       	     Toast.makeText(getApplicationContext(), "Serial Close", Toast.LENGTH_SHORT).show();  
 	    	         MyThread.interrupted();
 	        	       }
@@ -115,7 +115,7 @@ public class SerialComm extends Activity {
 						e.printStackTrace();
 					}
 	        		   Toast.makeText(getApplicationContext(), "data saved", Toast.LENGTH_SHORT).show();
-	        		   System.out.println("保存成功");
+	        		   System.out.println("data saved");
 
 	        	   }
 	        	         
@@ -145,12 +145,14 @@ public class SerialComm extends Activity {
 	    protected void onDestroy() {
 	        // TODO Auto-generated method stub
 	        HardwareControler.close(serial_fd);
-	        System.out.println("关闭串口");    
+	       System.out.println("close Serial");    
 	       MyThread.interrupted();
 //	       saveThread.interrupted();
 	        super.onDestroy();
 	    }
         
+
+
 
 	    class MyHandler extends Handler{
            public MyHandler(Looper looper){
@@ -158,7 +160,7 @@ public class SerialComm extends Activity {
            }
 	       //使用looper所在线程处理数据
 	        public void handleMessage(Message msg) {
-	        	//发送消息时执行handleMessage
+	        	//execute handleMessage when send message
 	            // TODO Auto-generated method stub
 	            super.handleMessage(msg);
 	            Bundle bd=new Bundle();
@@ -177,7 +179,7 @@ public class SerialComm extends Activity {
 					e.printStackTrace();
 				}
 
-	            System.out.println("显示数据"+s.trim());
+	           
 	            if(textView.getLineCount() >= 6)
 	 	       {
 	 	    	   myscroll.scrollBy(0, 30);
@@ -185,7 +187,7 @@ public class SerialComm extends Activity {
 			 	       {
 		            		
 			            	
-			            	//30行清空
+			            	//clear and save when line number is 30
 			            	String newly_content=textView.getText().toString();
 
 			            	textView.setText("No");
@@ -213,7 +215,7 @@ public class SerialComm extends Activity {
 	            {
 
 	            err=HardwareControler.select(serial_fd, 1, 0);
-	            if(err==1)//有数据可读
+	            if(err==1)//if have data
 	            {
 	            	for(int j=0;j<65;j++)
 	            		serial_RevBuf[j]='\0';	
@@ -229,10 +231,10 @@ public class SerialComm extends Activity {
 	            }
 
 	            try {
-	                Thread.sleep(140);  //让你的子线程“睡眠”2ms
+	                Thread.sleep(140);  //sleep 2ms
 	            } catch (InterruptedException e) {
 	                // TODO Auto-generated catch block
-	                e.printStackTrace();  //在命令行打印异常信息在程序中出错的位置及原因
+	                e.printStackTrace();  //print error
 	            }
 	         }
 	        }
