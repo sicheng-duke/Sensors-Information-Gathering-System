@@ -36,10 +36,22 @@ import android.widget.TextView;
 import android.widget.EditText; 
 import android.widget.ScrollView;
 import android.widget.Toast;
+/*
+* This is an Android App to enable the embedded device 
+* to gather and save data.
+*
+* Also it enables device to send data through socket to host computer.
+*
+*
+*
+*
+*/
 
 
 public class SerialComm extends Activity {
 	 
+	    //----------------------------------------------------------------------------------
+		//some UI components
 	    private int serial_fd=0;	   	    
 	    private TextView textView;
 	    private Handler handler;
@@ -55,6 +67,10 @@ public class SerialComm extends Activity {
 	    FileService file=new FileService(this); 
 	    String s="";
 	    String clc="";
+	    
+	    
+	    //----------------------------------------------------------------------------------
+	    //initialize
 	    @Override
 	    protected void onCreate(Bundle savedInstanceState) {
 	        // TODO Auto-generated method stub
@@ -69,6 +85,9 @@ public class SerialComm extends Activity {
 	        clear=(Button)findViewById(R.id.clear);
 	        save=(Button)findViewById(R.id.save);
 	        send=(Button)findViewById(R.id.send);
+
+	        //set actioinListener to different button
+	        //open serial
 	        openSerial.setOnClickListener(new Button.OnClickListener(){
 	        	   @Override
 	        	   public void onClick(View v) {
@@ -80,6 +99,8 @@ public class SerialComm extends Activity {
 	        	       }
 	        	         
 	        	        });
+
+	        //close serial
 	        closeSerial.setOnClickListener(new Button.OnClickListener(){
 	        	   @Override
 	        	   public void onClick(View v) {
@@ -90,7 +111,9 @@ public class SerialComm extends Activity {
 	    	         MyThread.interrupted();
 	        	       }
 	        	         
-	        	        });  
+	        	        });
+
+	        //clear content
 	        clear.setOnClickListener(new Button.OnClickListener(){
 	        	   
 	        	   public void onClick(View v) {
@@ -102,6 +125,8 @@ public class SerialComm extends Activity {
 	        	       }
 	        	         
 	        	        });
+
+	        //save content
 	        save.setOnClickListener(new Button.OnClickListener(){
 	        	   
 	        	   public void onClick(View v) {
@@ -120,6 +145,8 @@ public class SerialComm extends Activity {
 	        	   }
 	        	         
 	        	        });
+
+	        //send button
 	        send.setOnClickListener(new Button.OnClickListener(){
 	        	public void onClick(View v){
 	        		 // TODO Auto-generated method stub 
@@ -140,28 +167,34 @@ public class SerialComm extends Activity {
 	        });
 	    
 	    }
-	    
+
+	    //----------------------------------------------------------------------------------
+	    //Destory method, when exit the App, device will end all the progresses
 	    @Override
 	    protected void onDestroy() {
 	        // TODO Auto-generated method stub
-	        HardwareControler.close(serial_fd);
+	       HardwareControler.close(serial_fd);
 	       System.out.println("close Serial");    
 	       MyThread.interrupted();
-//	       saveThread.interrupted();
 	        super.onDestroy();
 	    }
         
 
 
-
+	    //----------------------------------------------------------------------------------
+	    //it is a handler, handle the message send by thread
+	    //it will receive the message, show it on the screen 
+	    //and send them to host by socket
 	    class MyHandler extends Handler{
            public MyHandler(Looper looper){
         	   super(looper);
            }
-	       //使用looper所在线程处理数据
+
+	       //handle the message
 	        public void handleMessage(Message msg) {
 	        	//execute handleMessage when send message
 	            // TODO Auto-generated method stub
+	            //receive the data, show it on the screen
 	            super.handleMessage(msg);
 	            Bundle bd=new Bundle();
 	            bd=msg.getData();
@@ -170,6 +203,7 @@ public class SerialComm extends Activity {
 	            String s=new String(buffer);
 	            textView.append(s);
                 
+                //send the data through socket
 	            try {
 					os = socket.getOutputStream();
 					os.write((s + "\r\n")
@@ -179,7 +213,7 @@ public class SerialComm extends Activity {
 					e.printStackTrace();
 				}
 
-	           
+	           //it is responsible for auto save
 	            if(textView.getLineCount() >= 6)
 	 	       {
 	 	    	   myscroll.scrollBy(0, 30);
@@ -203,8 +237,11 @@ public class SerialComm extends Activity {
 	 	       }
 	        }
 	    };
-	    
 
+	    
+	    //----------------------------------------------------------------------------------
+	    //the thread is responsible for reading the message from sensor and 
+	    //pack them into message, then send them to handler
 	    class MyThread extends Thread
 	    {
 	        int err=0;
@@ -213,9 +250,10 @@ public class SerialComm extends Activity {
 	            // TODO Auto-generated method stub           	
 	            while(true)
 	            {
-
+	            //it is a functioin define by the hardware,it can receive message from serial port
 	            err=HardwareControler.select(serial_fd, 1, 0);
-	            if(err==1)//if have data
+	            //if receive data, then send it to handler
+	            if(err==1)
 	            {
 	            	for(int j=0;j<65;j++)
 	            		serial_RevBuf[j]='\0';	
