@@ -51,7 +51,7 @@ import android.widget.Toast;
 public class SerialComm extends Activity {
 	 
 	    //----------------------------------------------------------------------------------
-		//some UI components
+	    //some UI components
 	    private int serial_fd=0;	   	    
 	    private TextView textView;
 	    private Handler handler;
