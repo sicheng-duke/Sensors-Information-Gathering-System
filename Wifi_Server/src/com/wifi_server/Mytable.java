@@ -1,7 +1,8 @@
 package com.wifi_server;
 
 import javax.swing.table.AbstractTableModel;
-
+//----------------------------------------------------------------------------
+//This class is responsible for the data table
 public class Mytable extends AbstractTableModel{
 	
 	//Default table value
