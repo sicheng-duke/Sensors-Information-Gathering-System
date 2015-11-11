@@ -4,7 +4,7 @@ import javax.swing.table.AbstractTableModel;
 
 public class Mytable extends AbstractTableModel{
 	
-	
+	//Default table value
 	Object[][] p=
 		{
 		{"HUB0","NULL","NULL"},
@@ -46,7 +46,7 @@ public class Mytable extends AbstractTableModel{
 	{
 		return n[col];
 	}
-
+	//get and set value function
 	@Override
 	public Object getValueAt(int row, int col) {
 		// TODO Auto-generated method stub
