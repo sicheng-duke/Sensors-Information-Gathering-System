@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 import java.io.*;
 import java.util.ArrayList;
 public class data {
-	
+	// sensor node array
 	String[] NodeArray=new String[]{
 			"HUB0",
 			"0001",
@@ -33,28 +33,19 @@ public class data {
 	};
 	int i=0;
 	
-	
+	//Update data for each node
 	 public void Create(String Node,String Temp, String Battery)
 	{
 
-		//System.out.println(Node);
-		 
+
 		 for(i=0;i<=NodeArray.length-1;i++)
 		
 				if(Node.equals(NodeArray[i]))
 				{
 					
 					System.out.println(NodeArray.length);
-					//System.out.println(server.p.p.length);
-					//server.p[0][1]=Temp;
-					//System.out.println(server.p[0][1]);
-					
-					//server.p.setValueAt("Node", 0, 0);
 					server.p.setValueAt(Temp, i, 1);
 					server.p.setValueAt(Battery,i,2);
-
-					//server.p.fireTableRowsInserted(0, 0);
-
 					server.table.repaint();
 				}
 			
