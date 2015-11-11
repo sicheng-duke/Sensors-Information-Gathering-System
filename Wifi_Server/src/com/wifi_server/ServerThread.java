@@ -3,7 +3,7 @@ import com.wifi_server.*;
 
 import java.io.*;
 import java.net.*;
-
+//This is responsible for the receiving data thread
 public class ServerThread implements Runnable {
 
 	Socket s=null;
@@ -20,6 +20,7 @@ public class ServerThread implements Runnable {
 		br=new BufferedReader(new InputStreamReader(s.getInputStream(),"utf-8"));
 	}
 	
+	//Thread that gets data and deals with the string
 	public void run()
 	{
 			
@@ -30,20 +31,13 @@ public class ServerThread implements Runnable {
 			{
 				
 				content=content.replace("No","\r\nNo");
-				
-
-
-
 				if(!content.contains("No"))
 					{
 						content=content.replace("\r\n", "");
 						ss=(ss+content).trim();		
 					}
-
-
 				if(content.contains("No"))
 				{
-					
 					if(ss.contains("de:"))
 					{	
 						
@@ -54,18 +48,11 @@ public class ServerThread implements Runnable {
 						String Battery;
 						Battery=ss.substring(28, 32);
 						new_data.Create(Node,Temp,Battery);
-						
-						//System.out.println(Node);
 						System.out.println(ss);
 						ss="";
 					}	
-					
-
 				}
-			
 
-//				System.out.println(content);
-				
 				server.textview.append(content);
 			}
 			
