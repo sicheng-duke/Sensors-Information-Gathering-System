@@ -8,9 +8,8 @@ import java.util.Calendar;
 
 public class FileService {
 	
-
+	//This is responsible for save the data to the disk
     public void saveToDisk(String fileName, String content) throws IOException {  
-        //File file = new File(new File("/mnt/sdcard"),fileName);  
         
         Calendar c = Calendar.getInstance();
         int year=c.get(Calendar.YEAR);
