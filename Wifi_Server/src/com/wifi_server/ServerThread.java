@@ -26,11 +26,8 @@ public class ServerThread implements Runnable {
 	{
 			
 			String content=null;
-			
-			
 			while((content=readFromClient())!=null)
 			{
-				
 				content=content.replace("No","\r\nNo");
 				if(!content.contains("No"))
 					{
