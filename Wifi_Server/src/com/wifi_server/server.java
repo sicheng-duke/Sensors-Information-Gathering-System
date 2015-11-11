@@ -16,7 +16,7 @@ import java.util.List;
 
 public class server extends JFrame {
 
-	//JFrame main_frame;
+	//UI components
 	JButton open;
 	JButton close;
 	JButton save;
@@ -32,17 +32,11 @@ public class server extends JFrame {
 	Box topLeft=Box.createVerticalBox();
 	Box topRight=Box.createVerticalBox();
 	static JFrame f=new JFrame();
-//	static DefaultTableModel defaultModel=null;
-	static Mytable p=null;
-//	static Object[][] p=
-//		{
-//		{"HUB0","0","0"}
-//	};
-	static JTable table=null;
-	//∂‡––Œƒ±æøÚ◊Èº˛
 
-	
-	//÷˜“™¥∞ø⁄
+	static Mytable p=null;
+	static JTable table=null;
+
+
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
 				new server();
@@ -53,19 +47,13 @@ public class server extends JFrame {
 					Socket s=ss.accept();
 					System.out.println("connect");
 					new Thread(new ServerThread(s)).start();
-					
-					
-					
 				}
-
-				
 	}
 	
+	//initialize the UI
 	public server()
 	{
 		open=new JButton("open  ");
-		//open.setSize(10,10);
-		//close=new JButton("close ");
 		save=new JButton("save");
 		IP=new JButton("ip      ");
 		add=new JButton("add  ");
@@ -73,8 +61,7 @@ public class server extends JFrame {
 		ipAddress=new TextField();
 		
 		ipAddress.setText("Welcome");
-		
-		ipAddress.setFont(new Font("ÀŒÃÂ",Font.BOLD,20));
+		ipAddress.setFont(new Font("ÂÆã‰Ωì",Font.BOLD,20));
 		ipAddress.setSize(16, 1);
 		
 		IP.addActionListener(new ipListener());
@@ -94,26 +81,19 @@ public class server extends JFrame {
 
 		
 		String[] n={"Node","Temp","Battery"};
-//		defaultModel=new DefaultTableModel(p,n);
-//		table=new JTable(defaultModel);
 		table.setPreferredScrollableViewportSize(new Dimension(200,100));
 		JScrollPane s=new JScrollPane(table);
 		
 		
-		//topLeft.add(Imagelabel);
-		//topLeft.add(Box.createVerticalStrut(10));
+
 		topLeft.add(textview);
-		
 		topLeft.add(Box.createVerticalStrut(10));
 		topLeft.add(ipAddress);
 
 		
 		topRight.add(IP);
-		//topRight.add(open);
-		//topRight.add(close);
 		topRight.add(save);
-		
-		//topRight.add(add);
+
 		
 		
 		Container contentPane=f.getContentPane();		
@@ -125,11 +105,8 @@ public class server extends JFrame {
 		
 		f.pack();
 		f.setVisible(true);
-		//this.add(f);
-		//this.setLocation(200, 200);
 		f.setLocation(100, 100);
 		f.setSize(917, 600);
-		//f.setIconImage((new ImageIcon("image/Xiaohui.jpg")).getImage());
 		f.setTitle("Tianjin University Information Gathering System");
 		f.addWindowListener(new WindowAdapter()
 		{
@@ -141,7 +118,7 @@ public class server extends JFrame {
 
 	}
 
-	//ªÒ»°ipµÿ÷∑
+	//Get Ip Address
 	class ipListener implements ActionListener
 	{
 
@@ -151,7 +128,7 @@ public class server extends JFrame {
 
 			try {
 				String s=InetAddress.getLocalHost().getHostAddress();
-				ipAddress.setText("±æª˙IPµÿ÷∑Œ™"+s);
+				ipAddress.setText("Êú¨Êú∫IPÂú∞ÂùÄ‰∏∫"+s);
 				System.out.println(s);
 			} catch (UnknownHostException e) {
 				// TODO Auto-generated catch block
@@ -160,7 +137,7 @@ public class server extends JFrame {
 		}
 	}
 	
-	//¥Ê¥¢Œƒº˛
+	//Save data
 	class SaveFile implements ActionListener
 		{
 
@@ -182,17 +159,4 @@ public class server extends JFrame {
 		
 		}
 	
-	class add implements ActionListener
-	{
-
-		@Override
-		public void actionPerformed(ActionEvent arg0) {
-			// TODO Auto-generated method stub
-			
-			
-			
-			
-		}
-		
-	}
 }
