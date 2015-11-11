@@ -53,56 +53,48 @@ public class server extends JFrame {
 	//initialize the UI
 	public server()
 	{
+		//Button
 		open=new JButton("open  ");
 		save=new JButton("save");
 		IP=new JButton("ip      ");
 		add=new JButton("add  ");
+		//IP
 		textview=new TextArea(); 
 		ipAddress=new TextField();
-		
 		ipAddress.setText("Welcome");
 		ipAddress.setFont(new Font("宋体",Font.BOLD,20));
 		ipAddress.setSize(16, 1);
-		
 		IP.addActionListener(new ipListener());
 		save.addActionListener(new SaveFile());
 		add.addActionListener(new add());
 		
-		
+		//Table
 		p=new Mytable();
 		table=new JTable(p);
-		
-		ImageIcon icon=new ImageIcon("image/LOGO.jpg");
-		JLabel Imagelabel=new JLabel(icon);
-		add(Imagelabel);
-		
-		
-		
-
-		
 		String[] n={"Node","Temp","Battery"};
 		table.setPreferredScrollableViewportSize(new Dimension(200,100));
 		JScrollPane s=new JScrollPane(table);
-		
-		
+				
+		//Image Icon
+		ImageIcon icon=new ImageIcon("image/LOGO.jpg");
+		JLabel Imagelabel=new JLabel(icon);
+		add(Imagelabel);
 
+		//organize the UI
 		topLeft.add(textview);
 		topLeft.add(Box.createVerticalStrut(10));
 		topLeft.add(ipAddress);
-
-		
 		topRight.add(IP);
 		topRight.add(save);
-
 		
-		
+		//Add box to container
 		Container contentPane=f.getContentPane();		
 		contentPane.add(Imagelabel,BorderLayout.NORTH);
 		contentPane.add(s,BorderLayout.WEST);
 		contentPane.add(topLeft,BorderLayout.CENTER);
 		contentPane.add(topRight,BorderLayout.EAST);
 
-		
+		//set size and initial loaction
 		f.pack();
 		f.setVisible(true);
 		f.setLocation(100, 100);
@@ -125,7 +117,6 @@ public class server extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			// TODO Auto-generated method stub
-
 			try {
 				String s=InetAddress.getLocalHost().getHostAddress();
 				ipAddress.setText("本机IP地址为"+s);
@@ -144,7 +135,6 @@ public class server extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				
 				String s=textview.getText().toString();
 				String ss="";
 				textview.setText(ss);
