@@ -3,6 +3,7 @@ import com.wifi_server.*;
 
 import java.io.*;
 import java.net.*;
+//----------------------------------------------------------------------------
 //This is responsible for the receiving data thread
 public class ServerThread implements Runnable {
 
