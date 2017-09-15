@@ -5,7 +5,7 @@ The Android App code is in the new_serial.
 
 The Java code is in the Wifi_Server
 
-### Android UI
+###Android UI
 ![](https://github.com/sicheng-duke/Sensors-Information-Gathering-System/blob/master/UI.png)
 
 ###Java Host UI
